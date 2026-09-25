@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lexduel/components/player_panel.dart';
+import 'package:lexduel/components/word_field.dart';
 import 'package:lexduel/style/app_colors.dart';
 
 class GameView extends StatefulWidget {
@@ -36,7 +37,7 @@ class _GameViewState extends State<GameView> {
               ],
             ),
           ),
-          // TextField(),
+          WordField(),
         ],
       ),
     );
