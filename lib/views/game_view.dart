@@ -37,7 +37,12 @@ class _GameViewState extends State<GameView> {
               ],
             ),
           ),
-          WordField(),
+          Stack(
+            children: [
+              Positioned.fill(child: Container(color: AppColorsDark.primary)),
+              SafeArea(top: false, child: WordField()),
+            ],
+          ),
         ],
       ),
     );
