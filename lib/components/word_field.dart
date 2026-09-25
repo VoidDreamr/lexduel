@@ -27,8 +27,7 @@ class _WordFieldState extends State<WordField> {
       controller: _controller,
       decoration: InputDecoration(
         filled: true,
-        fillColor: AppColorsLight.surface,
-        border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.zero)),
+        fillColor: AppColorsDark.primary,
       ),
       style: const TextStyle(color: AppColorsLight.primary),
       cursorColor: AppColorsLight.primary,
