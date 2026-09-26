@@ -8,6 +8,19 @@ class Dictionary {
   /// Checks whether a word is valid.
   bool isValidWord(String word) => _words.contains(word.trim().toLowerCase());
 
+  /// Returns the dictionary words that begin with [letter].
+  Set<String> getWordsThatStartWith(String letter) {
+    final normalizedLetter = letter.trim().toLowerCase();
+    if (normalizedLetter.length != 1 ||
+        !RegExp(r'^[a-z]$').hasMatch(normalizedLetter)) {
+      return const {};
+    }
+
+    return Set.unmodifiable(
+      _words.where((word) => word.startsWith(normalizedLetter)),
+    );
+  }
+
   factory Dictionary.fromText(String contents) {
     final words = contents
         .split(RegExp(r'\r?\n'))

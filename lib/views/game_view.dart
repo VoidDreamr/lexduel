@@ -3,10 +3,12 @@ import 'dart:ui' show ImageFilter;
 import 'package:flutter/material.dart';
 import 'package:lexduel/components/player_panel.dart';
 import 'package:lexduel/components/word_field.dart';
+import 'package:lexduel/game/ai_player_agent.dart';
 import 'package:lexduel/game/dictionary.dart';
 import 'package:lexduel/game/game.dart';
 import 'package:lexduel/game/game_controller.dart';
 import 'package:lexduel/game/game_state.dart';
+import 'package:lexduel/game/local_player_agent.dart';
 import 'package:lexduel/style/app_colors.dart';
 import 'package:lexduel/style/app_theme.dart';
 
@@ -29,9 +31,13 @@ class _GameViewState extends State<GameView> {
       Game(
         playerOneId: 'Player 1',
         playerTwoId: 'Player 2',
-        maxScore: 15,
+        maxScore: 45,
         dictionary: widget.dictionary,
       ),
+      playerAgents: {
+        'Player 1': const LocalPlayerAgent(),
+        'Player 2': AIPlayerAgent(widget.dictionary),
+      },
     );
   }
 
