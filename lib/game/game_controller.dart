@@ -20,4 +20,10 @@ class GameController extends ChangeNotifier {
     notifyListeners();
     return Future.value(result);
   }
+
+  void rematch() {
+    _game.reset();
+    _lastError = null;
+    notifyListeners();
+  }
 }

@@ -39,6 +39,18 @@ class Game {
 
   GameState get state => _state;
 
+  void reset() {
+    final playerOneId = _state.playerOne.id;
+    final playerTwoId = _state.playerTwo.id;
+
+    _state = GameState(
+      playerOne: PlayerState(id: playerOneId),
+      playerTwo: PlayerState(id: playerTwoId),
+      currentPlayerId: playerOneId,
+      maxScore: _state.maxScore,
+    );
+  }
+
   WordSubmissionResult submitWord({
     required String playerId,
     required String word,
