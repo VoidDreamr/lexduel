@@ -44,28 +44,44 @@ class _GameViewState extends State<GameView> {
       builder: (context, _) {
         final state = _controller.state;
         final submissionError = _controller.lastError;
+        final playerOneShare =
+            state.currentPlayerId == state.playerOne.id ? 4 / 7 : 3 / 7;
         return Scaffold(
           body: Column(
             children: [
               Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: PlayerPanel(
-                        score: state.playerOne.score,
-                        words: state.playerOne.words,
-                        background: context.accents.positive,
-                        alignment: CrossAxisAlignment.end,
-                      ),
-                    ),
-                    Expanded(
-                      child: PlayerPanel(
-                        score: state.playerTwo.score,
-                        words: state.playerTwo.words,
-                        background: context.accents.negative,
-                      ),
-                    ),
-                  ],
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween<double>(
+                    begin: playerOneShare,
+                    end: playerOneShare,
+                  ),
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  builder: (context, share, _) {
+                    final playerOneFlex = (share * 1000).round();
+                    final playerTwoFlex = 1000 - playerOneFlex;
+                    return Row(
+                      children: [
+                        Expanded(
+                          flex: playerOneFlex,
+                          child: PlayerPanel(
+                            score: state.playerOne.score,
+                            words: state.playerOne.words,
+                            background: context.accents.positive,
+                            alignment: CrossAxisAlignment.end,
+                          ),
+                        ),
+                        Expanded(
+                          flex: playerTwoFlex,
+                          child: PlayerPanel(
+                            score: state.playerTwo.score,
+                            words: state.playerTwo.words,
+                            background: context.accents.negative,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
               Container(
@@ -94,12 +110,6 @@ class _GameViewState extends State<GameView> {
                                     ),
                                   ),
                                 ),
-                              Text(
-                                '${state.currentPlayerId}\'s turn',
-                                style: TextStyle(
-                                  color: context.colors.onPrimary,
-                                ),
-                              ),
                               WordField(
                                 onSubmitted: (word) async {
                                   await _controller.submitWord(word);
