@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:lexduel/game/dictionary.dart';
 import 'package:lexduel/style/app_theme.dart';
 import 'package:lexduel/style/color_set.dart';
 import 'package:lexduel/views/game_view.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final dictionary = await Dictionary.load();
+  runApp(MyApp(dictionary: dictionary));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Dictionary dictionary;
+
+  const MyApp({super.key, required this.dictionary});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Lex Duel!',
       theme: AppTheme.buildTheme(Brightness.dark, ColorSet.ocean),
       debugShowCheckedModeBanner: false,
-      home: const GameView(),
+      home: GameView(dictionary: dictionary),
     );
   }
 }

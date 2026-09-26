@@ -5,6 +5,9 @@ class Dictionary {
 
   Dictionary._(Set<String> words) : _words = Set.unmodifiable(words);
 
+  /// Checks whether a word is valid.
+  bool isValidWord(String word) => _words.contains(word.trim().toLowerCase());
+
   factory Dictionary.fromText(String contents) {
     final words = contents
         .split(RegExp(r'\r?\n'))
@@ -21,6 +24,4 @@ class Dictionary {
     );
     return Dictionary.fromText(contents);
   }
-
-  bool isValidWord(String word) => _words.contains(word.trim().toLowerCase());
 }

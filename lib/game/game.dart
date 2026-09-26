@@ -115,8 +115,13 @@ class WordSubmissionResult {
 }
 
 enum WordSubmissionError {
-  gameFinished,
-  wrongPlayer,
-  invalidWord,
-  wrongStartingLetter,
+  gameFinished(message: 'The game is over.'),
+  wrongPlayer(message: 'It is not your turn.'),
+  invalidWord(message: 'That is not a valid word.'),
+  wrongStartingLetter(
+    message: 'The word must start with the last letter of the previous word.',
+  );
+
+  final String message;
+  new({required this.message});
 }
